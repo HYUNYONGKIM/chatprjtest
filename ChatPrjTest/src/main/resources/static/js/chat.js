@@ -36,9 +36,24 @@ function wsEvt(){
 	
 	//메세지가 있으면
 	ws.onmessage = function(data){
-		var msg = data.data;
+//		console.log("서버에서 내보낸 값 : "+data ); //[object ManageEvent]
+		var msg = data.data; //그안의 데이터값
+		//msg : {"sessionId":"2a8bd873-cf3c-7c9b-2d86-0b64226e3d7e","type":"getId"}
+		//msg : {"msg":"안녕하지","sessionId":"6161d3c5-6bef-8bb1-032a-1d1609bac20b","type":"message","userName":"바나나"}
 		if(msg != null && msg.trim() != ""){
-			$("#chating").append("<p>"+msg+"</p>");
+			var d = JSON.parse(msg);
+			if(d.type == "getId"){
+				var si = d.sessionId != null ? d.sessionId: "";
+				if(si != ""){
+					$("#sessionId").val(si);
+				}
+			}else if(d.type == "message"){
+				if(d.sessionId == $("#sessionId").val()){
+					$("#chating").append("<p class='me'>나 : "+d.msg+"</p>");
+				}else{
+					$("#chating").append("<p class='others'>"+d.userName+" : "+d.msg+"</p>");
+				}
+			}
 		}	
 	}
 	
@@ -50,11 +65,21 @@ function wsEvt(){
 }
 
 function send(){
-	var uN = $("#userName").val();
-	var msg = $("#chatting").val();
-	if(msg != null && msg.trim() != ""){
-		ws.send(uN+":"+msg); // userName : msg 형식이니까...JSON형식으로 보내진다는 거..send(data)하면 onmessage시작
+//	var uN = $("#userName").val();
+//	var msg = $("#chatting").val();
+	var option = {
+		type: "message",
+		sessionId: $("#sessionId").val(),
+		userName: $("#userName").val(),
+		msg: $("#chatting").val()
 	}
+	if(option.msg != null && option.msg.trim() != ""){
+		ws.send(JSON.stringify(option));
+		console.log("send()에서 보내는 값 : " + JSON.stringify(option));
+	}
+//	if(msg != null && msg.trim() != ""){
+//		ws.send(uN+":"+msg); // userName : msg 형식이니까...JSON형식으로 보내진다는 거..send(data)하면 onmessage시작
+//	}
 	$("#chatting").val("");
 	$("#chatting").focus();
 }

@@ -12,6 +12,7 @@
 <body>
 	<div id="container" class="container">
 		<h1>채팅</h1>
+		<input type="hidden" id="sessionId" value="">
 		<div id="chating" class="chating">
 		</div>
 		
