@@ -1,6 +1,7 @@
 //채팅방들어오면 가장 먼저 할 것 설정
 window.onload = function(){
-	$("#userName").focus(); // 사용자 이름 입력란 focus
+//	$("#userName").focus(); // 사용자 이름 입력란 focus
+	
 }
 
 //웹소켓 변수
@@ -30,7 +31,6 @@ function chatName(){
 function wsEvt(){
 	//소켓 열리면 초기화 세팅
 	ws.onopen = function(data){
-		console.log(data);
 		$("#chatting").focus();
 	}
 	
@@ -83,3 +83,12 @@ function send(){
 	$("#chatting").val("");
 	$("#chatting").focus();
 }
+
+
+
+
+
+
+
+
+
