@@ -1,6 +1,6 @@
 //채팅방들어오면 가장 먼저 할 것 설정
 window.onload = function(){
-//	$("#userName").focus(); // 사용자 이름 입력란 focus
+	$("#userName").focus(); // 사용자 이름 입력란 focus
 	
 }
 
@@ -9,7 +9,8 @@ var ws;
 
 //2. 웹소켓 연결
 function wsOpen(){
-	ws = new WebSocket("ws://"+location.host+"/chating");
+	ws = new WebSocket("ws://"+location.host+"/chating/"+$("#roomNum").val());
+	
 	wsEvt();
 }
 
@@ -31,6 +32,8 @@ function chatName(){
 function wsEvt(){
 	//소켓 열리면 초기화 세팅
 	ws.onopen = function(data){
+		$("#chating").append("<p class='me'>채팅방에 입장하였습니다.</p>");
+		enter();
 		$("#chatting").focus();
 	}
 	
@@ -53,6 +56,8 @@ function wsEvt(){
 				}else{
 					$("#chating").append("<p class='others'>"+d.userName+" : "+d.msg+"</p>");
 				}
+			}else if(d.type =="enter"){
+				$("#chating").append("<p class='others'>"+d.userName+"님이 입장하셨습니다.</p>");
 			}
 		}	
 	}
@@ -71,11 +76,12 @@ function send(){
 		type: "message",
 		sessionId: $("#sessionId").val(),
 		userName: $("#userName").val(),
+		roomNum: $("#roomNum").val(),
 		msg: $("#chatting").val()
 	}
 	if(option.msg != null && option.msg.trim() != ""){
 		ws.send(JSON.stringify(option));
-		console.log("send()에서 보내는 값 : " + JSON.stringify(option));
+//		console.log("send()에서 보내는 값 : " + JSON.stringify(option));
 	}
 //	if(msg != null && msg.trim() != ""){
 //		ws.send(uN+":"+msg); // userName : msg 형식이니까...JSON형식으로 보내진다는 거..send(data)하면 onmessage시작
@@ -84,7 +90,19 @@ function send(){
 	$("#chatting").focus();
 }
 
-
+//새로운 사람 들어오면 알림
+function enter(){
+	var uN = $("#userName").val();
+	var option = {
+		type: "enter",
+		sessionId: $("#sessionId").val(),
+		userName: uN,
+		roomNum: $("#roomNum").val(),
+	}
+	if(uN != null && uN.trim() != ""){
+		ws.send(JSON.stringify(option));
+	}
+}
 
 
 

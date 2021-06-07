@@ -13,6 +13,8 @@
 	<div id="container" class="container">
 		<h1>채팅</h1>
 		<input type="hidden" id="sessionId" value="">
+		<input type="hidden" id="roomNum" value="${roomNum}">
+		<input type="hidden" id="roomName" value="${roomName}">
 		
 		<div id="chating" class="chating">
 		</div>
