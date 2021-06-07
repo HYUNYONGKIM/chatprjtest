@@ -18,8 +18,15 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		registry.addHandler(socketHandler, "/chating");
+		registry.addHandler(socketHandler, "/chating/{roomNum}");
 	}
 
+//	@Bean
+//	public CommonsMultipartResolver multiPartResolver() {
+//		CommonsMultipartResolver commonsMultipartResolver = new CommonsMultipartResolver();
+//		commonsMultipartResolver.setMaxInMemorySize(0);
+//		
+//		return commonsMultipartResolver;
+//	}
 	
 }

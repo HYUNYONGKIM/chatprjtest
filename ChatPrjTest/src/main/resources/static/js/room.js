@@ -45,10 +45,6 @@ function createChatingRoom(res){
 
 //ajax연결
 function commonAjax(url, parameter, type, calbak, contentType){
-//	console.log(url);
-//	console.log(parameter);
-//	console.log(type);
-//	console.log(calbak);
 	$.ajax({
 		url: url,
 		data: parameter,
