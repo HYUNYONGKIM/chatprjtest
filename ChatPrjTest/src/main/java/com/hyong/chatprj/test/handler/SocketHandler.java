@@ -7,6 +7,7 @@ import java.util.List;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.BinaryMessage;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -64,6 +65,12 @@ public class SocketHandler extends TextWebSocketHandler{
 //		}
 //		
 		
+	}
+	
+	//바이너리 파일 
+	@Override
+	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
+
 	}
 	
 	//소켓연결이 되면 시작됨.
