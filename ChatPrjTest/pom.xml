@@ -11,6 +11,7 @@
 	<groupId>com.hyong.chatprj.test</groupId>
 	<artifactId>ChatPrjTest</artifactId>
 	<version>1.0</version>
+	<packaging>war</packaging>
 	<name>ChatPrjTest</name>
 	<description>GitFlowPrac</description>
 	<properties>
