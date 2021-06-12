@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="container">
-		<h1>채팅방</h1>
+		<h1>채팅방-수정테스트</h1>
 		<div id="roomContainer" class="roomContainer">
 			<table id="roomList" class="roomList">
 			</table>
