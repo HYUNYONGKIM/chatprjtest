@@ -51,6 +51,13 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- marked the embedded servlet container as provided --> 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- json simple -->
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
